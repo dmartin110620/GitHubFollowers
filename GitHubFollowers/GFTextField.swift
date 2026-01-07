@@ -22,26 +22,22 @@ class GFTextField: UITextField {
     
     
     private func configure() {
-        
         layer.cornerRadius          = 10
         layer.borderWidth           = 2
         layer.borderColor           = UIColor.systemGray4.cgColor
         
-        textColor                   = .label
+        backgroundColor             = .tertiarySystemBackground
         tintColor                   = .label
-        textAlignment               = .center
-        font                        = UIFont.preferredFont(forTextStyle: .title2)
+        textColor                   = .label
+        font                        = UIFont.preferredFont(forTextStyle: .title3)
         adjustsFontSizeToFitWidth   = true
         minimumFontSize             = 12
         
-        backgroundColor             = .tertiarySystemBackground
-        autocorrectionType          = .no
-        
         placeholder                 = "Enter a username"
+        textAlignment               = .center
         
-        
+        autocorrectionType          = .no
         translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
 }
