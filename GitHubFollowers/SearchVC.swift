@@ -12,6 +12,8 @@ class SearchVC: UIViewController {
     let logoImageView = UIImageView()
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(color: .systemGreen, title: "Get Followers")
+    
+    var isUsernameEntered: Bool { return !usernameTextField.text!.isEmpty }
 
     
     override func viewDidLoad() {
@@ -36,6 +38,19 @@ class SearchVC: UIViewController {
     }
     
     
+    @objc private func pushFollowerListVC() {
+        guard isUsernameEntered else {
+            print("No username was entered")
+            return
+        }
+        
+        let followerListVC      = FollowerListVC()
+        followerListVC.username = usernameTextField.text
+        followerListVC.title    = usernameTextField.text
+        navigationController?.pushViewController(followerListVC, animated: true)
+    }
+    
+    
     private func configureLogoImageView() {
         view.addSubview(logoImageView)
         
@@ -53,6 +68,8 @@ class SearchVC: UIViewController {
     
     private func configureTextField() {
         view.addSubview(usernameTextField)
+        // Setting the delegate. Listens to the Return Key
+        usernameTextField.delegate = self
         
         NSLayoutConstraint.activate([
             usernameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
@@ -65,6 +82,8 @@ class SearchVC: UIViewController {
     
     private func configureCallToActionButton() {
         view.addSubview(callToActionButton)
+        // Target to pass data when tapped
+        callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
@@ -72,5 +91,13 @@ class SearchVC: UIViewController {
             callToActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+}
+
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowerListVC()
+        return true
     }
 }
