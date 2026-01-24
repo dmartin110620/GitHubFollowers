@@ -1,8 +1,8 @@
 //
-//  ErrorMessage.swift
+//  GFError.swift
 //  GitHubFollowers
 //
-//  Created by Daniel Felipe Martin Franco on 1/7/26.
+//  Created by Daniel Felipe Martin Franco on 1/23/26.
 //
 
 import Foundation

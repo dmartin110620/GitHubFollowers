@@ -14,19 +14,29 @@ class GFButton: UIButton {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(color: UIColor, title: String) {
+    
+    init(backgroundColor: UIColor, title: String) {
         super.init(frame: .zero)
         
         configuration                       = .prominentClearGlass()
-        configuration?.baseBackgroundColor  = color.withAlphaComponent(1)
+        configuration?.baseBackgroundColor  = backgroundColor.withAlphaComponent(1)
         configuration?.title                = title
-        
         configure()
     }
+    
+    
+    func set(backgroundColor: UIColor, title: String) {
+        configuration                       = .prominentClearGlass()
+        configuration?.baseBackgroundColor  = backgroundColor.withAlphaComponent(1)
+        configuration?.title                = title
+        configure()
+    }
+    
     
     private func configure() {
         configuration?.cornerStyle          = .medium
@@ -35,4 +45,5 @@ class GFButton: UIButton {
         
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
 }

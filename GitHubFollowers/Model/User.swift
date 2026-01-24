@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct User: Codable {
+nonisolated struct User: Codable {
     var login: String
-    var avatarURL: String
+    var avatarUrl: String
+    var htmlUrl: String
+    var followersUrl: String
     var name: String?
     var location: String?
     var bio: String?
     var publicRepos: Int
     var publicGists: Int
-    var htmlUrl: String
     var followers: Int
     var following: Int
-    var followersUrl: String
     var createdAt: String
 }
