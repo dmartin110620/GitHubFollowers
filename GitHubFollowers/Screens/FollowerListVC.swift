@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowerListVCDelagate: AnyObject {
+    func didRequestFollowers(for username: String)
+}
+
 class FollowerListVC: UIViewController {
 
     var username: String!
@@ -41,6 +45,9 @@ class FollowerListVC: UIViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     
@@ -103,6 +110,11 @@ class FollowerListVC: UIViewController {
         DispatchQueue.main.async{ self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
     
+    
+    @objc func addButtonTapped() {
+        print("Added tapped")
+    }
+    
 }
 
 
@@ -126,6 +138,7 @@ extension FollowerListVC: UICollectionViewDelegate {
         
         let destVC          = UserInfoVC()
         destVC.username     = follower.login
+        destVC.delegate     = self
         let navController   = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
     }
@@ -148,4 +161,21 @@ extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
         updateData(on: followers)
     }
     
+}
+
+
+extension FollowerListVC: FollowerListVCDelagate {
+    
+    func didRequestFollowers(for username: String) {
+        // get followers for that user
+        self.username   = username
+        title           = username
+        page            = 1
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+        
+        getFollowers(username: username, page: page)
+    }
+
 }

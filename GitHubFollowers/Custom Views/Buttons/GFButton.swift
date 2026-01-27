@@ -11,7 +11,7 @@ class GFButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+//        configure(title: "", color: .systemBlue, systemImageName: "")
     }
     
     
@@ -20,28 +20,27 @@ class GFButton: UIButton {
     }
     
     
-    init(backgroundColor: UIColor, title: String) {
+    init(backgroundColor: UIColor, title: String, systemImageName: String?) {
         super.init(frame: .zero)
-        
-        configuration                       = .prominentClearGlass()
-        configuration?.baseBackgroundColor  = backgroundColor.withAlphaComponent(1)
-        configuration?.title                = title
-        configure()
+        configure(title: title, color: backgroundColor, systemImageName: systemImageName)
     }
     
     
-    func set(backgroundColor: UIColor, title: String) {
-        configuration                       = .prominentClearGlass()
-        configuration?.baseBackgroundColor  = backgroundColor.withAlphaComponent(1)
-        configuration?.title                = title
-        configure()
+    func set(backgroundColor: UIColor, title: String, systemImageName: String?) {
+        configure(title: title, color: backgroundColor, systemImageName: systemImageName)
     }
     
     
-    private func configure() {
+    private func configure(title: String, color: UIColor, systemImageName: String?) {
+        configuration                       = .prominentClearGlass()
+        configuration?.baseBackgroundColor  = color.withAlphaComponent(0.5)
+        configuration?.baseForegroundColor  = color
+        configuration?.title                = title
         configuration?.cornerStyle          = .medium
-        configuration?.baseForegroundColor  = .white
         titleLabel?.font                    = UIFont.preferredFont(forTextStyle: .headline)
+        
+        configuration?.image                = UIImage(systemName: systemImageName ?? "")
+        configuration?.imagePadding         = 10
         
         translatesAutoresizingMaskIntoConstraints = false
     }
