@@ -72,6 +72,7 @@ class FollowerListVC: UIViewController {
     
     func getFollowers(username: String, page: Int) {
         showLoadingView()
+        
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
             self.dismissLoadingView()
@@ -112,7 +113,32 @@ class FollowerListVC: UIViewController {
     
     
     @objc func addButtonTapped() {
-        print("Added tapped")
+        showLoadingView()
+        
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                
+                PersistanceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let self = self else { return }
+                    
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Success!", message: "This user has been added to your favorites.", buttonTitle: "OK")
+                        return
+                    }
+                    
+                    self.presentGFAlertOnMainThread(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+                }
+                
+                
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
     
 }

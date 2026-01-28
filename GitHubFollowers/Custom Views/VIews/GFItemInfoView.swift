@@ -74,7 +74,7 @@ class GFItemInfoView: UIView {
             titleLabel.text       = "Following"
         }
         
-        countLabel.text       = String(count)
+        countLabel.text           = String(count)
     }
     
 }
