@@ -19,6 +19,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        view.addSubviews(logoImageView, usernameTextField, callToActionButton)
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
@@ -53,8 +54,6 @@ class SearchVC: UIViewController {
     
     
     private func configureLogoImageView() {
-        view.addSubview(logoImageView)
-        
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
         
@@ -68,7 +67,6 @@ class SearchVC: UIViewController {
     
     
     private func configureTextField() {
-        view.addSubview(usernameTextField)
         // Setting the delegate. Listens to the Return Key
         usernameTextField.delegate = self
         
@@ -82,7 +80,6 @@ class SearchVC: UIViewController {
     
     
     private func configureCallToActionButton() {
-        view.addSubview(callToActionButton)
         // Target to pass data when tapped
         callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
         

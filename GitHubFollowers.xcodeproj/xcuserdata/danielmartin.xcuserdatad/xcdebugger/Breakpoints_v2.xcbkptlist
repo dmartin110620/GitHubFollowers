@@ -14,9 +14,9 @@
             filePath = "GitHubFollowers/Screens/FollowerListVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "init?(coder:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
