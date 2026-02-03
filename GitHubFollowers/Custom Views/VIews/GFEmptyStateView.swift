@@ -23,10 +23,9 @@ class GFEmptyStateView: UIView {
     }
     
     
-    init(message: String) {
-        super.init(frame: .zero)
+    convenience init(message: String) {
+        self.init(frame: .zero)
         messageLabel.text = message
-        configure()
     }
     
     
@@ -40,7 +39,7 @@ class GFEmptyStateView: UIView {
         logoImageview.image         = UIImage(named: "empty-state-logo")
         logoImageview.translatesAutoresizingMaskIntoConstraints = false
         
-        let centerYAnchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? -80 : -120
+        let centerYAnchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? -90 : -120
         let bottomAncchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? 100 : 40
         
         NSLayoutConstraint.activate([

@@ -32,6 +32,7 @@ class GFTextField: UITextField {
         adjustsFontSizeToFitWidth   = true
         minimumFontSize             = 12
         
+        clearButtonMode             = .whileEditing
         placeholder                 = "Enter a username"
         textAlignment               = .center
         

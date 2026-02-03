@@ -8,16 +8,16 @@
 import Foundation
 
 nonisolated struct User: Codable {
-    var login: String
-    var avatarUrl: String
-    var htmlUrl: String
-    var followersUrl: String
+    let login: String
+    let avatarUrl: String
+    let htmlUrl: String
+    let followersUrl: String
     var name: String?
     var location: String?
     var bio: String?
-    var publicRepos: Int
-    var publicGists: Int
-    var followers: Int
-    var following: Int
-    var createdAt: String
+    let publicRepos: Int
+    let publicGists: Int
+    let followers: Int
+    let following: Int
+    let createdAt: Date
 }
