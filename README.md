@@ -25,16 +25,28 @@ A feature-rich iOS app for searching GitHub users and exploring their followers.
 ## 📷 Screenshots
 
 ### Home/Search Screen
-!<img width="1206" height="2622" alt="image" src="https://github.com/user-attachments/assets/bca778ed-3505-420d-9a87-3740a3157eb7" />
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/bca778ed-3505-420d-9a87-3740a3157eb7" />
 
 
 ### User Profile
-!<img width="1206" height="2622" alt="image" src="https://github.com/user-attachments/assets/772a27a4-648f-4639-b4b9-9fb4b0d56c68" />
-
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/772a27a4-648f-4639-b4b9-9fb4b0d56c68" />
 
 
 ### Followers List
-!<img width="1206" height="2622" alt="image" src="https://github.com/user-attachments/assets/ea3d733f-97e1-4eaf-aab0-b58566d737af" />
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/ea3d733f-97e1-4eaf-aab0-b58566d737af" />
+
+
+### Favorites List
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/0b2a504d-7156-497c-b568-afbf1093ffcb" />
+
+
+### SafariVC 
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/b6b03dc5-e439-4b10-8b86-640ce2ca4bc5" />
+
+
+### Custom Alerts
+<img width="406" height="2622" alt="image" src="https://github.com/user-attachments/assets/08b393d2-a14e-4b31-97fb-0b6e60268498" />
+
 
 ---
 
