@@ -8,7 +8,6 @@
 import UIKit
 
 class GFTextField: UITextField {
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,18 +27,18 @@ class GFTextField: UITextField {
         
         tintColor                   = .label
         textColor                   = .label
+        textAlignment               = .center
         font                        = UIFont.preferredFont(forTextStyle: .title3)
         adjustsFontSizeToFitWidth   = true
         minimumFontSize             = 12
-        
-        clearButtonMode             = .whileEditing
-        placeholder                 = "Enter a username"
-        textAlignment               = .center
         
         backgroundColor             = .tertiarySystemBackground
         autocorrectionType          = .no
         keyboardType                = .default
         returnKeyType               = .go
+        clearButtonMode             = .whileEditing
+        placeholder                 = "Enter a username"
+        
         translatesAutoresizingMaskIntoConstraints = false
     }
     

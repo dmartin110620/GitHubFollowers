@@ -20,6 +20,7 @@ extension UIViewController {
         }
     }
     
+    
     func  presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true)

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum SFSymbols {
     static let location     = UIImage(systemName: "location.fill")
     static let repos        = UIImage(systemName: "folder.fill")

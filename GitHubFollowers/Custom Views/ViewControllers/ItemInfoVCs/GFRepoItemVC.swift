@@ -15,6 +15,7 @@ class GFRepoItemVC: GFItemInfoVC {
     
     weak var delegate: GFRepoItemVCDelegate!
     
+    
     init(user: User, delegate: GFRepoItemVCDelegate) {
         super.init(user: user)
         self.delegate = delegate
@@ -35,10 +36,12 @@ class GFRepoItemVC: GFItemInfoVC {
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .repos, withCount: user.publicRepos)
         itemInfoViewTwo.set(itemInfoType: .gists, withCount: user.publicGists)
-        actionButton.set(backgroundColor: .systemPurple, title: "GitHub Profile", systemImageName: "text.page.badge.magnifyingglass")
+        actionButton.set(color: .systemPurple, title: "GitHub Profile", systemImageName: "text.page.badge.magnifyingglass")
     }
+    
     
     override func actionButtonTapped() {
         delegate.didTapGitHubProfile(for: user)
     }
+    
 }

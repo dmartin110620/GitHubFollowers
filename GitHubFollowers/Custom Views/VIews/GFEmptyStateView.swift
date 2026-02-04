@@ -12,6 +12,7 @@ class GFEmptyStateView: UIView {
     let messageLabel = GFTitleLabel(textAlignment: .center, fontSize: 28)
     let logoImageview = UIImageView()
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -41,10 +42,9 @@ class GFEmptyStateView: UIView {
         messageLabel.textColor      = .secondaryLabel
         
         let centerYAnchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? -90 : -120
-        let messageLabelCenterYConstraint = messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: centerYAnchorConstant)
-        messageLabelCenterYConstraint.isActive = true
         
         NSLayoutConstraint.activate([
+            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: centerYAnchorConstant),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             messageLabel.heightAnchor.constraint(equalToConstant: 200)
@@ -57,13 +57,13 @@ class GFEmptyStateView: UIView {
         logoImageview.translatesAutoresizingMaskIntoConstraints = false
         
         let bottomAncchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? 100 : 40
-        let logoImageViewBottomConstraint = logoImageview.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomAncchorConstant)
-        logoImageViewBottomConstraint.isActive = true
         
         NSLayoutConstraint.activate([
             logoImageview.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             logoImageview.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
-            logoImageview.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 170)
+            logoImageview.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 170),
+            logoImageview.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomAncchorConstant)
         ])
     }
+    
 }

@@ -11,7 +11,7 @@ class GFButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        configure(title: "", color: .systemBlue, systemImageName: "")
+        configure()
     }
     
     
@@ -20,27 +20,25 @@ class GFButton: UIButton {
     }
     
     
-    init(backgroundColor: UIColor, title: String, systemImageName: String?) {
-        super.init(frame: .zero)
-        configure(title: title, color: backgroundColor, systemImageName: systemImageName)
+    convenience init(color: UIColor, title: String, systemImageName: String) {
+        self.init(frame: .zero)
+        set(color: color, title: title, systemImageName: systemImageName)
     }
     
     
-    func set(backgroundColor: UIColor, title: String, systemImageName: String?) {
-        configure(title: title, color: backgroundColor, systemImageName: systemImageName)
-    }
-    
-    
-    private func configure(title: String, color: UIColor, systemImageName: String?) {
-        configuration                       = .prominentClearGlass()
+    func set(color: UIColor, title: String, systemImageName: String) {
+        configure()
         configuration?.baseBackgroundColor  = color.withAlphaComponent(0.5)
         configuration?.baseForegroundColor  = color
         configuration?.title                = title
+        configuration?.image                = UIImage(systemName: systemImageName)
+    }
+    
+    
+    private func configure() {
+        configuration                       = .prominentClearGlass()
         configuration?.cornerStyle          = .medium
-        titleLabel?.font                    = UIFont.preferredFont(forTextStyle: .headline)
-        
-        configuration?.image                = UIImage(systemName: systemImageName ?? "")
-        configuration?.imagePadding         = 10
+        configuration?.imagePadding         = 6
         
         translatesAutoresizingMaskIntoConstraints = false
     }

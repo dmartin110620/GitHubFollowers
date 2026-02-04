@@ -12,7 +12,7 @@ class GFAlertVC: UIViewController {
     let containerView   = GFAlertContainerView()
     let titleLabel      = GFTitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel    = GFBodyLabel(textAlignment: .center)
-    let actionButton    = GFButton(backgroundColor: .systemRed, title: "OK", systemImageName: nil)
+    let actionButton    = GFButton(color: .systemRed, title: "OK", systemImageName: "checkmark.circle")
     
     var alertTitle: String?
     var message: String?
@@ -79,10 +79,6 @@ class GFAlertVC: UIViewController {
         ])
     }
     
-    @objc private func dismmissVC() {
-        dismiss(animated: true)
-    }
-    
     
     private func configureMessageLabel() {
         messageLabel.text           = message ?? "Please try again"
@@ -94,6 +90,11 @@ class GFAlertVC: UIViewController {
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
             messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12)
         ])
+    }
+    
+    
+    @objc private func dismmissVC() {
+        dismiss(animated: true)
     }
 
 }
