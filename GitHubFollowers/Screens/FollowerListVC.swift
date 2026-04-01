@@ -51,6 +51,21 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if followers.isEmpty && !isLoadingMoreFollowers {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "person.slash")
+            config.text = "No Followers"
+            config.secondaryText = "This user has no followers. Go follow them!"
+            contentUnavailableConfiguration = config
+        } else if isSearching && filteredFollowers.isEmpty {
+            contentUnavailableConfiguration = UIContentUnavailableConfiguration.search()
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+    
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -81,19 +96,20 @@ class FollowerListVC: GFDataLoadingVC {
     func getFollowers(username: String, page: Int) {
         showLoadingView()
         isLoadingMoreFollowers = true
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                self.updateUI(with: followers)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+      
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Something Happened!", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentDefaultError()
+                    dismissLoadingView()
+                }
             }
-            
-            self.isLoadingMoreFollowers = false
         }
     }
     
@@ -101,12 +117,8 @@ class FollowerListVC: GFDataLoadingVC {
     func updateUI(with followers: [Follower]) {
         if followers.count < 100 { self.hasMoreFollowers = false }
         self.followers.append(contentsOf: followers)
-        if self.followers.isEmpty {
-            let message = "This user has no followers. Go follow them 👨‍💻"
-            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
-            return
-        }
         self.updateData(on: self.followers)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     
@@ -130,18 +142,21 @@ class FollowerListVC: GFDataLoadingVC {
     @objc func addButtonTapped() {
         showLoadingView()
         
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let user):
-                self.addUserToFavorites(user: user)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                addUserToFavorites(user: user)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Something Happened!", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
             }
         }
+        
     }
     
     
@@ -149,14 +164,16 @@ class FollowerListVC: GFDataLoadingVC {
         let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
         
         PersistanceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-            guard let self = self else { return }
-            
-            guard let error = error else {
-                self.presentGFAlertOnMainThread(title: "Success!", message: "This user has been added to your favorites.", buttonTitle: "OK")
+            guard let self else { return }
+            guard let error else {
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Success!", message: "This user has been added to your favorites.", buttonTitle: "OK")
+                }
                 return
             }
-            
-            self.presentGFAlertOnMainThread(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "Something Happened!", message: error.rawValue, buttonTitle: "OK")
+            }
         }
     }
     
@@ -199,12 +216,14 @@ extension FollowerListVC: UISearchResultsUpdating {
             filteredFollowers.removeAll()
             updateData(on: followers)
             isSearching = false
+            setNeedsUpdateContentUnavailableConfiguration()
             return
         }
         
         isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
 }
