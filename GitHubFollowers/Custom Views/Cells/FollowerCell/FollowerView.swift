@@ -17,11 +17,11 @@ struct FollowerView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
-                Image("avatar-placeholder")
+                Image(.avatarPlaceholder)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
-            .clipShape(Circle())
+            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 8, height: 8)))
             
             Text(follower.login)
                 .bold()
