@@ -17,9 +17,9 @@ enum SFSymbols {
 
 
 enum Images {
-    static let placeholder  = UIImage(named: "avatar-placeholder")
-    static let ghLogo       = UIImage(named: "gh-logo")
-    static let emptyState   = UIImage(named: "empty-state-logo")
+    static let placeholder  = UIImage(resource: .avatarPlaceholder)
+    static let ghLogo       = UIImage(resource: .ghLogo)
+    static let emptyState   = UIImage(resource: .emptyStateLogo)
 }
 
 

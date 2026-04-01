@@ -41,7 +41,7 @@ class GFEmptyStateView: UIView {
         messageLabel.numberOfLines  = 3
         messageLabel.textColor      = .secondaryLabel
         
-        let centerYAnchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? -90 : -120
+        let centerYAnchorConstant: CGFloat = DeviceType.isiPhoneSE2 ? -90 : -170
         
         NSLayoutConstraint.activate([
             messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: centerYAnchorConstant),
@@ -62,7 +62,7 @@ class GFEmptyStateView: UIView {
             logoImageview.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             logoImageview.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             logoImageview.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 170),
-            logoImageview.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomAncchorConstant)
+            logoImageview.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: bottomAncchorConstant)
         ])
     }
     
