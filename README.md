@@ -98,7 +98,7 @@ Originally inspired by a tutorial. The implementation is bespoke, modernized, an
 
 ---
 
-## 👤 Author
+## 👤 Repo Owner
 
 - Daniel Martin  
 - LinkedIn: https://www.linkedin.com/in/daniel-felipe-martín-franco-140bb1241/  
@@ -106,4 +106,4 @@ Originally inspired by a tutorial. The implementation is bespoke, modernized, an
 
 ---
 
-_This app demonstrates my ability to build real-world, scalable UIKit apps with modern APIs, clean architecture, and refined UX._
+_This app demonstrates the ability to build real-world, scalable UIKit apps with modern APIs, clean architecture, and refined UX._
